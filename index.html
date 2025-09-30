@@ -1,0 +1,897 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="cs"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;HUHLU Weight Loss Challenge&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>* {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 1400px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2.5em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-shadow: 2px 2px 4px rgba(0,0,0,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.header p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.2em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0.9;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bonus-goal {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: rgba(255, 255, 255, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(10px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid rgba(255, 255, 255, 0.3);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stats-grid {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat-card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 16px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat-card h3 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #667eea;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-transform: uppercase;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.stat-card .value {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.leaderboard {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 16px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.leaderboard h2 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #667eea;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.8em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.participant {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.participant:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateX(5px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #e9ecef;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.participant-header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.rank {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.5em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #667eea;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.rank.gold { color: #FFD700; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.rank.silver { color: #C0C0C0; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.rank.bronze { color: #CD7F32; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.participant-info {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-left: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.participant-name {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.participant-stats {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #666;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.participant-stat-line {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 3px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.participant-progress-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-bar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #e9ecef;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>overflow: visible;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-fill {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(90deg, #667eea, #764ba2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: width 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-percentage {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>right: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-50%);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-percentage.negative {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #dc3545;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-percentage.positive {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #28a745;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.progress-fill.negative {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #dc3545 !important;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.medal-count {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.medal-item {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.medal-icon {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.3em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.olympic-table {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.olympic-row {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: 50px 1fr 80px 80px 80px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid #e9ecef;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.olympic-row.header {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.olympic-row:not(.header):hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #f8f9fa;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chart-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 16px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.chart-container h2 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #667eea;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.8em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.data-entry {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 16px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.data-entry h2 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #667eea;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.8em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.entry-grid {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.entry-field {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.entry-field label {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.entry-field input {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #e9ecef;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: border-color 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.entry-field input:focus {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>outline: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-color: #667eea;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: linear-gradient(135deg, #667eea, #764ba2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 30px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-right: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 8px rgba(0,0,0,0.2);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button.secondary {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #6c757d;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button.secondary:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: #5a6268;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.button-group {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>#fileInput {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.podium {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: flex-end;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 30px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.podium-place {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 8px rgba(0,0,0,0.1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-width: 150px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.podium-place.first {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>order: 2;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(1.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.podium-place.second {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>order: 1;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.podium-place.third {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>order: 3;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.podium-medal {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 3em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.podium-name {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.2em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.podium-medals {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.9em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1&gt;🏆 HUHLU VÝZVA 2025 🏆&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;22 týdnů hubnutí | Týden 3 z 22&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="bonus-goal"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>🎯 &lt;strong&gt;Bonusový cíl skupiny:&lt;/strong&gt; Zhubnou Verču (58,3 kg celkem)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="stats-grid"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;Celkový cíl&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="value"&gt;-50 kg&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;Zhubnuto celkem&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="value"&gt;-5.2 kg&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;Průměr týdne&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="value"&gt;-1.73 kg&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="stat-card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;Postup cíle&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="value"&gt;10.4%&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="leaderboard"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;🏅 Olympijské hodnocení&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p style="color: #666; margin-bottom: 20px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>🥇 Zlato: Splnil/překročil týdenní cíl |<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>🥈 Stříbro: Zhubl, ale pod cílem |<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>🥉 Bronz: Přibral</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="olympicPodium"&gt;&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="olympic-table"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="olympic-row header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;Pořadí&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div&gt;Jméno&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div style="text-align: center;"&gt;🥇&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div style="text-align: center;"&gt;🥈&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div style="text-align: center;"&gt;🥉&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="olympicTable"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="leaderboard"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;📊 Žebříček (% cíle splněno)&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="leaderboardList"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="chart-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;📈 Vývoj hubnutí&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;canvas id="progressChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="chart-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;📊 Týdenní úbytek&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;canvas id="weeklyChart"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="data-entry"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h2&gt;➕ Zadat novou váhu (Týden 4)&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="entry-grid" id="entryGrid"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="button-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="button" onclick="saveWeights()"&gt;Uložit váhy&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="button secondary" onclick="downloadData()"&gt;💾 Stáhnout data&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button class="button secondary" onclick="document.getElementById('fileInput').click()"&gt;📁 Nahrát data&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="file" id="fileInput" accept=".json" onchange="uploadData(event)"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const participants = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Annette', goal: -15, weeklyGoal: -0.682, start: 0, color: '#FF6B6B', weeks: [0, 0, -0.6, -1.5] },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Katka', goal: -10, weeklyGoal: -0.455, start: 0, color: '#4ECDC4', weeks: [0, 0.4, 0.4, 0.3] },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Verča', goal: -2, weeklyGoal: -0.091, start: 58.3, color: '#FFE66D', weeks: [58.3, 58, 58.7, 58] },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Lukáš', goal: -5, weeklyGoal: -0.227, start: 92.8, color: '#95E1D3', weeks: [92.8, 93.2, 92, 91.7] },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Petr', goal: -3, weeklyGoal: -0.136, start: 73, color: '#F38181', weeks: [73, 74, 74, 73.9] },</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Stano', goal: -15, weeklyGoal: -0.682, start: 103.5, color: '#AA96DA', weeks: [103.5, 101.8, 100.8, 100.1] }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function calculateMedals(person) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let gold = 0, silver = 0, bronze = 0;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (let i = 1; i &lt; person.weeks.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const weeklyChange = person.weeks[i - 1] - person.weeks[i];</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (weeklyChange &gt;= Math.abs(person.weeklyGoal)) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>gold++;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else if (weeklyChange &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>silver++;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>bronze++;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>return { gold, silver, bronze };</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function compareOlympic(a, b) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (a.gold !== b.gold) return b.gold - a.gold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (a.silver !== b.silver) return b.silver - a.silver;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return b.bronze - a.bronze;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderOlympicRanking() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rankings = participants.map(person =&gt; ({</p>
+<p class="p1"><span class="Apple-converted-space">                </span>...person,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>...calculateMedals(person)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>})).sort(compareOlympic);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const podium = document.getElementById('olympicPodium');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const topThree = rankings.slice(0, 3);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (topThree.length &gt;= 3) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>podium.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="podium"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="podium-place second"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-medal"&gt;🥈&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-name"&gt;${topThree[1].name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-medals"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>🥇${topThree[1].gold} 🥈${topThree[1].silver} 🥉${topThree[1].bronze}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="podium-place first"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-medal"&gt;🥇&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-name"&gt;${topThree[0].name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-medals"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>🥇${topThree[0].gold} 🥈${topThree[0].silver} 🥉${topThree[0].bronze}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="podium-place third"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-medal"&gt;🥉&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-name"&gt;${topThree[2].name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="podium-medals"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>🥇${topThree[2].gold} 🥈${topThree[2].silver} 🥉${topThree[2].bronze}</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const table = document.getElementById('olympicTable');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>table.innerHTML = '';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Určení pořadí s dělenými místy</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let currentRank = 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let i = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>while (i &lt; rankings.length) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const person = rankings[i];</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Zjistíme, kolik lidí má stejné medaile</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const tiedGroup = [person];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>for (let j = i + 1; j &lt; rankings.length; j++) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (person.gold === rankings[j].gold &amp;&amp;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>person.silver === rankings[j].silver &amp;&amp;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>person.bronze === rankings[j].bronze) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>tiedGroup.push(rankings[j]);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Vytvoření textu pořadí</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let rankText;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (tiedGroup.length &gt; 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const endRank = currentRank + tiedGroup.length - 1;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>rankText = `${currentRank}-${endRank}.`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>rankText = `${currentRank}.`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Zobrazíme všechny lidi na děleném místě</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tiedGroup.forEach(p =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>div.className = 'olympic-row';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div style="font-weight: bold; color: #667eea;"&gt;${rankText}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div style="font-weight: bold;"&gt;${p.name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div style="text-align: center; font-weight: bold; color: #FFD700;"&gt;${p.gold}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div style="text-align: center; font-weight: bold; color: #C0C0C0;"&gt;${p.silver}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div style="text-align: center; font-weight: bold; color: #CD7F32;"&gt;${p.bronze}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>table.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Posuneme currentRank o počet lidí na tomto místě</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentRank += tiedGroup.length;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>i += tiedGroup.length;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function calculateProgress(person) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const current = person.weeks[person.weeks.length - 1];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const change = person.start - current;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Vrátíme skutečné procento (může být záporné)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return (change / Math.abs(person.goal)) * 100;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderLeaderboard() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const sorted = [...participants].sort((a, b) =&gt; calculateProgress(b) - calculateProgress(a));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const list = document.getElementById('leaderboardList');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>sorted.forEach((person, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const progress = calculateProgress(person);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const current = person.weeks[person.weeks.length - 1];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const change = person.start - current;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>let rankClass = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let medal = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (index === 0) { rankClass = 'gold'; medal = '🥇'; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (index === 1) { rankClass = 'silver'; medal = '🥈'; }</p>
+<p class="p1"><span class="Apple-converted-space">                </span>else if (index === 2) { rankClass = 'bronze'; medal = '🥉'; }</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Zobrazení startovní váhy</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const startWeight = person.start === 0 ? 'n/a' : `${person.start} kg`;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Procento cíle ze startovní váhy</p>
+<p class="p1"><span class="Apple-converted-space">                </span>let goalPercent = 'n/a';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (person.start !== 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>goalPercent = `${(Math.abs(person.goal) / person.start * 100).toFixed(1)}% start.hmot.`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Určení, zda zhubl nebo přibral</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const isNegative = change &lt; 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const progressText = isNegative ?<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`Přibral/a: ${Math.abs(progress).toFixed(1)}%` :<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>`Splněno: ${progress.toFixed(1)}%`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const progressClass = isNegative ? 'negative' : (progress &gt; 0 ? 'positive' : '');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const fillClass = isNegative ? 'negative' : '';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>div.className = 'participant';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="participant-header"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="rank ${rankClass}"&gt;${medal || (index + 1)}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="participant-info"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="participant-name"&gt;${person.name}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="participant-stats"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="participant-stat-line"&gt;Start: ${startWeight}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="participant-stat-line"&gt;Aktuálně: ${person.start === 0 ? 'n/a' : current + ' kg'}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="participant-stat-line"&gt;Změna: ${change.toFixed(1)} kg ${isNegative ? '⚠️' : '✓'}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="participant-stat-line"&gt;Cíl: ${person.goal} kg (${goalPercent})&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="participant-progress-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="progress-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="progress-fill ${fillClass}" style="width: ${Math.min(Math.abs(progress), 100)}%; background: ${person.color}"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;div class="progress-percentage ${progressClass}"&gt;${progressText}&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>list.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderProgressChart() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ctx = document.getElementById('progressChart').getContext('2d');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const weeks = ['Start', 'Týden 1', 'Týden 2', 'Týden 3'];</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const datasets = participants.map(person =&gt; ({</p>
+<p class="p1"><span class="Apple-converted-space">                </span>label: person.name,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: person.weeks,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>borderColor: person.color,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>backgroundColor: person.color + '33',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tension: 0.4,</p>
+<p class="p1"><span class="Apple-converted-space">                </span>fill: false</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}));</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(ctx, {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'line',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: weeks,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: datasets</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>plugins: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>legend: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>position: 'top',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>title: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>display: false</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>beginAtZero: false,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>title: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>display: true,</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>text: 'Váha (kg)'</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderWeeklyChart() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const ctx = document.getElementById('weeklyChart').getContext('2d');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const weeklyChanges = participants.map(person =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const week3 = person.weeks[3];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const week2 = person.weeks[2];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return week2 - week3;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>new Chart(ctx, {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>type: 'bar',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>data: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>labels: participants.map(p =&gt; p.name),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>datasets: [{</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>label: 'Úbytek v týdnu 3 (kg)',</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>data: weeklyChanges,</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>backgroundColor: participants.map(p =&gt; p.color),</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}]</p>
+<p class="p1"><span class="Apple-converted-space">                </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                </span>options: {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>responsive: true,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>plugins: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>legend: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>display: false</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>},</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>scales: {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>y: {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>beginAtZero: true,</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>title: {</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>display: true,</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>text: 'Úbytek (kg)'</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function renderEntryFields() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const grid = document.getElementById('entryGrid');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>participants.forEach(person =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>div.className = 'entry-field';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Pro Annette a Katku zadáváme změnu, pro ostatní absolutní váhu</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const isChangeMode = person.start === 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const placeholder = isChangeMode ? 'Změna váhy (např. -0.5)' : 'Váha v kg';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const label = isChangeMode ? `${person.name} (změna)` : person.name;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>div.innerHTML = `</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;label&gt;${label}&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;input type="number" step="0.1" id="weight-${person.name}" placeholder="${placeholder}"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>grid.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function saveWeights() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let hasData = false;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>participants.forEach(person =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const input = document.getElementById(`weight-${person.name}`);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (input.value) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const value = parseFloat(input.value);</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Pro Annette a Katku (start = 0) zadáváme změnu, pro ostatní absolutní váhu</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (person.start === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Změna: např. -0.5 znamená zhubnout 0.5 kg</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const currentWeight = person.weeks[person.weeks.length - 1];</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>person.weeks.push(currentWeight + value);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Absolutní váha</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>person.weeks.push(value);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>input.value = '';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>hasData = true;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (hasData) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Překreslíme všechny grafy a tabulky</p>
+<p class="p1"><span class="Apple-converted-space">                </span>refreshDisplay();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert('✅ Váhy uloženy a grafy aktualizovány!\n\n💡 Nezapomeň stáhnout data, abys o ně nepřišel!');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert('⚠️ Prosím zadejte alespoň jednu váhu.');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function refreshDisplay() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('leaderboardList').innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('olympicTable').innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('olympicPodium').innerHTML = '';</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderOlympicRanking();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>renderLeaderboard();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Aktualizujeme číslo týdne v nadpisu</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const currentWeek = participants[0].weeks.length - 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelector('.header p').textContent = `22 týdnů hubnutí | Týden ${currentWeek} z 22`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelector('.data-entry h2').textContent = `➕ Zadat novou váhu (Týden ${currentWeek + 1})`;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Aktualizujeme statistiky</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateStats();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateStats() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Celkový úbytek</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let totalLoss = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>participants.forEach(person =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const current = person.weeks[person.weeks.length - 1];</p>
+<p class="p1"><span class="Apple-converted-space">                </span>totalLoss += (person.start - current);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Průměrný týdenní úbytek</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const weekCount = participants[0].weeks.length - 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const avgWeekly = weekCount &gt; 0 ? totalLoss / weekCount : 0;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Procento postupu</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const totalGoal = -50;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const progressPercent = (totalLoss / Math.abs(totalGoal)) * 100;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.stat-card .value')[1].textContent = `${totalLoss.toFixed(1)} kg`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.stat-card .value')[2].textContent = `${avgWeekly.toFixed(2)} kg`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.stat-card .value')[3].textContent = `${progressPercent.toFixed(1)}%`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function downloadData() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const data = {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>version: '1.0',</p>
+<p class="p1"><span class="Apple-converted-space">                </span>lastUpdated: new Date().toISOString(),</p>
+<p class="p1"><span class="Apple-converted-space">                </span>participants: participants</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const dataStr = JSON.stringify(data, null, 2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const dataBlob = new Blob([dataStr], { type: 'application/json' });</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const url = URL.createObjectURL(dataBlob);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const link = document.createElement('a');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>link.href = url;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>link.download = `huhlu-vyzva-${new Date().toISOString().split('T')[0]}.json`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>link.click();</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>URL.revokeObjectURL(url);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function uploadData(event) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const file = event.target.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!file) return;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const reader = new FileReader();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>reader.onload = function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const data = JSON.parse(e.target.result);</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Validace dat</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (!data.participants || !Array.isArray(data.participants)) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>throw new Error('Neplatný formát dat');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Načteme data</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>data.participants.forEach((savedPerson, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>if (participants[index] &amp;&amp; savedPerson.name === participants[index].name) {</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>participants[index].weeks = savedPerson.weeks;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>});</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Překreslíme vše</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>refreshDisplay();</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>alert('✅ Data úspěšně nahrána!');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>alert('❌ Chyba při načítání dat: ' + error.message);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>reader.readAsText(file);</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Reset file input</p>
+<p class="p1"><span class="Apple-converted-space">            </span>event.target.value = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderOlympicRanking();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderLeaderboard();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderProgressChart();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderWeeklyChart();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>renderEntryFields();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
