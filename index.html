@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUHLU Weight Loss Challenge</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #31326F 0%, #637AB3 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .bonus-goal {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: white;
+            text-align: center;
+            font-size: 1.1em;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .stat-card h3 {
+            color: #31326F;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .stat-card .value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .leaderboard {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .leaderboard h2 {
+            color: #31326F;
+            margin-bottom: 20px;
+            font-size: 1.55em;
+        }
+        
+        .participant {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            margin-bottom: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .participant:hover {
+            transform: translateX(5px);
+            background: #e9ecef;
+        }
+        
+        .participant-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .rank {
+            font-size: 1.5em;
+            font-weight: bold;
+            width: 40px;
+            color: #31326F;
+        }
+        
+        .rank.gold { color: #FFD700; }
+        .rank.silver { color: #C0C0C0; }
+        .rank.bronze { color: #CD7F32; }
+        
+        .participant-info {
+            flex: 1;
+            margin-left: 15px;
+        }
+        
+        .participant-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .participant-stats {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .participant-stat-line {
+            margin-bottom: 3px;
+        }
+        
+        .participant-progress-section {
+            margin-top: 15px;
+        }
+        
+        .progress-bar {
+            flex: 1;
+            height: 25px;
+            background: #e9ecef;
+            border-radius: 12px;
+            overflow: visible;
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4FB7B3, #A8FBD4);
+            border-radius: 12px;
+            transition: width 0.3s ease;
+        }
+        
+        .progress-percentage {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #333;
+        }
+        
+        .progress-percentage.negative {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .progress-percentage.positive {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .progress-fill.negative {
+            background: #dc3545 !important;
+        }
+        
+        .medal-count {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+        
+        .medal-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .medal-icon {
+            font-size: 1.3em;
+        }
+        
+        .olympic-table {
+            margin-top: 30px;
+        }
+        
+        .olympic-row {
+            display: grid;
+            grid-template-columns: 50px 1fr 80px 80px 80px;
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            align-items: center;
+        }
+        
+        .olympic-row.header {
+            font-weight: bold;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .olympic-row:not(.header):hover {
+            background: #f8f9fa;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .chart-container h2 {
+            color: #31326F;
+            margin-bottom: 20px;
+            font-size: 1.55em;
+        }
+        
+        .data-entry {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        
+        .data-entry h2 {
+            color: #31326F;
+            margin-bottom: 20px;
+            font-size: 1.55em;
+        }
+        
+        .entry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .entry-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .entry-field label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .entry-field input {
+            padding: 10px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.2s;
+        }
+        
+        .entry-field input:focus {
+            outline: none;
+            border-color: #4FB7B3;
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #4FB7B3, #31326F);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: transform 0.2s;
+            margin-right: 10px;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .button.secondary {
+            background: #6c757d;
+        }
+        
+        .button.secondary:hover {
+            background: #5a6268;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            margin: 30px 0;
+            padding: 20px;
+        }
+        
+        .podium-place {
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            min-width: 150px;
+        }
+        
+        .podium-place.first {
+            order: 2;
+            transform: scale(1.1);
+        }
+        
+        .podium-place.second {
+            order: 1;
+        }
+        
+        .podium-place.third {
+            order: 3;
+        }
+        
+        .podium-medal {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .podium-name {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .podium-medals {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 HUHLU VÝZVA 2025 🏆</h1>
+            <p>22 týdnů hubnutí | Týden 3 z 22</p>
+        </div>
+        
+        <div class="bonus-goal">
+            🎯 <strong>Bonusový cíl skupiny:</strong> Zhubnou Verču (58,3 kg celkem)
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Celkový cíl</h3>
+                <div class="value">-50 kg</div>
+            </div>
+            <div class="stat-card">
+                <h3>Zhubnuto celkem</h3>
+                <div class="value">-5.2 kg</div>
+            </div>
+            <div class="stat-card">
+                <h3>Průměr týdne</h3>
+                <div class="value">-1.73 kg</div>
+            </div>
+            <div class="stat-card">
+                <h3>Postup cíle</h3>
+                <div class="value">10.4%</div>
+            </div>
+        </div>
+        
+        <div class="leaderboard">
+            <h2>🏅 Olympijské hodnocení</h2>
+            <p style="color: #666; margin-bottom: 20px;">
+                🥇 Zlato: Splnil/překročil týdenní cíl | 
+                🥈 Stříbro: Zhubl, ale pod cílem | 
+                🥉 Bronz: Přibral
+            </p>
+            
+            <div id="olympicPodium"></div>
+            
+            <div class="olympic-table">
+                <div class="olympic-row header">
+                    <div>Pořadí</div>
+                    <div>Jméno</div>
+                    <div style="text-align: center;">🥇</div>
+                    <div style="text-align: center;">🥈</div>
+                    <div style="text-align: center;">🥉</div>
+                </div>
+                <div id="olympicTable"></div>
+            </div>
+        </div>
+        
+        <div class="leaderboard">
+            <h2>📊 Žebříček (% cíle splněno)</h2>
+            <div id="leaderboardList"></div>
+        </div>
+        
+        <div class="chart-container">
+            <h2>📈 Vývoj hubnutí</h2>
+            <canvas id="progressChart"></canvas>
+        </div>
+        
+        <div class="chart-container">
+            <h2>📊 Týdenní úbytek</h2>
+            <canvas id="weeklyChart"></canvas>
+        </div>
+        
+        <div class="data-entry">
+            <h2>➕ Zadat novou váhu (Týden 4)</h2>
+            <div class="entry-grid" id="entryGrid"></div>
+            <div class="button-group">
+                <button class="button" onclick="saveWeights()">Uložit váhy</button>
+                <button class="button secondary" onclick="downloadHTML()">📥 Stáhnout HTML pro GitHub</button>
+                <button class="button secondary" onclick="downloadData()">💾 Stáhnout data (JSON)</button>
+                <button class="button secondary" onclick="document.getElementById('fileInput').click()">📁 Nahrát data (JSON)</button>
+                <input type="file" id="fileInput" accept=".json" onchange="uploadData(event)">
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const participants = [
+            { name: 'Annette', goal: -15, weeklyGoal: -0.682, start: 0, color: '#FF6B6B', weeks: [0, 0, -0.6, -1.5] },
+            { name: 'Katka', goal: -10, weeklyGoal: -0.455, start: 0, color: '#4ECDC4', weeks: [0, 0.4, 0.4, 0.3] },
+            { name: 'Verča', goal: -2, weeklyGoal: -0.091, start: 58.3, color: '#FFE66D', weeks: [58.3, 58, 58.7, 58] },
+            { name: 'Lukáš', goal: -5, weeklyGoal: -0.227, start: 92.8, color: '#95E1D3', weeks: [92.8, 93.2, 92, 91.7] },
+            { name: 'Petr', goal: -3, weeklyGoal: -0.136, start: 73, color: '#F38181', weeks: [73, 74, 74, 73.9] },
+            { name: 'Stano', goal: -15, weeklyGoal: -0.682, start: 103.5, color: '#AA96DA', weeks: [103.5, 101.8, 100.8, 100.1] }
+        ];
+        
+        function calculateMedals(person) {
+            let gold = 0, silver = 0, bronze = 0;
+            
+            for (let i = 1; i < person.weeks.length; i++) {
+                const weeklyChange = person.weeks[i - 1] - person.weeks[i];
+                
+                if (weeklyChange >= Math.abs(person.weeklyGoal)) {
+                    gold++;
+                } else if (weeklyChange > 0) {
+                    silver++;
+                } else {
+                    bronze++;
+                }
+            }
+            
+            return { gold, silver, bronze };
+        }
+        
+        function compareOlympic(a, b) {
+            if (a.gold !== b.gold) return b.gold - a.gold;
+            if (a.silver !== b.silver) return b.silver - a.silver;
+            return b.bronze - a.bronze;
+        }
+        
+        function renderOlympicRanking() {
+            const rankings = participants.map(person => ({
+                ...person,
+                ...calculateMedals(person)
+            })).sort(compareOlympic);
+            
+            const podium = document.getElementById('olympicPodium');
+            const topThree = rankings.slice(0, 3);
+            
+            if (topThree.length >= 3) {
+                podium.innerHTML = `
+                    <div class="podium">
+                        <div class="podium-place second">
+                            <div class="podium-medal">🥈</div>
+                            <div class="podium-name">${topThree[1].name}</div>
+                            <div class="podium-medals">
+                                🥇${topThree[1].gold} 🥈${topThree[1].silver} 🥉${topThree[1].bronze}
+                            </div>
+                        </div>
+                        <div class="podium-place first">
+                            <div class="podium-medal">🥇</div>
+                            <div class="podium-name">${topThree[0].name}</div>
+                            <div class="podium-medals">
+                                🥇${topThree[0].gold} 🥈${topThree[0].silver} 🥉${topThree[0].bronze}
+                            </div>
+                        </div>
+                        <div class="podium-place third">
+                            <div class="podium-medal">🥉</div>
+                            <div class="podium-name">${topThree[2].name}</div>
+                            <div class="podium-medals">
+                                🥇${topThree[2].gold} 🥈${topThree[2].silver} 🥉${topThree[2].bronze}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const table = document.getElementById('olympicTable');
+            table.innerHTML = ''; // Vyčistíme tabulku před přidáním nových řádků
+            
+            // Určení pořadí s dělenými místy
+            let currentRank = 1;
+            let i = 0;
+            while (i < rankings.length) {
+                const person = rankings[i];
+                
+                // Zjistíme, kolik lidí má stejné medaile
+                const tiedGroup = [person];
+                for (let j = i + 1; j < rankings.length; j++) {
+                    if (person.gold === rankings[j].gold && 
+                        person.silver === rankings[j].silver && 
+                        person.bronze === rankings[j].bronze) {
+                        tiedGroup.push(rankings[j]);
+                    } else {
+                        break;
+                    }
+                }
+                
+                // Vytvoření textu pořadí
+                let rankText;
+                if (tiedGroup.length > 1) {
+                    const endRank = currentRank + tiedGroup.length - 1;
+                    rankText = `${currentRank}-${endRank}.`;
+                } else {
+                    rankText = `${currentRank}.`;
+                }
+                
+                // Zobrazíme všechny lidi na děleném místě
+                tiedGroup.forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = 'olympic-row';
+                    div.innerHTML = `
+                        <div style="font-weight: bold; color: #31326F;">${rankText}</div>
+                        <div style="font-weight: bold;">${p.name}</div>
+                        <div style="text-align: center; font-weight: bold; color: #FFD700;">${p.gold}</div>
+                        <div style="text-align: center; font-weight: bold; color: #C0C0C0;">${p.silver}</div>
+                        <div style="text-align: center; font-weight: bold; color: #CD7F32;">${p.bronze}</div>
+                    `;
+                    table.appendChild(div);
+                });
+                
+                // Posuneme currentRank o počet lidí na tomto místě
+                currentRank += tiedGroup.length;
+                i += tiedGroup.length;
+            }
+        }
+        
+        function calculateProgress(person) {
+            const current = person.weeks[person.weeks.length - 1];
+            const change = person.start - current;
+            // Vrátíme skutečné procento (může být záporné)
+            return (change / Math.abs(person.goal)) * 100;
+        }
+        
+        function renderLeaderboard() {
+            const sorted = [...participants].sort((a, b) => calculateProgress(b) - calculateProgress(a));
+            const list = document.getElementById('leaderboardList');
+            list.innerHTML = ''; // Vyčistíme seznam před přidáním nových položek
+            
+            sorted.forEach((person, index) => {
+                const progress = calculateProgress(person);
+                const current = person.weeks[person.weeks.length - 1];
+                const change = person.start - current;
+                
+                let rankClass = '';
+                let medal = '';
+                if (index === 0) { rankClass = 'gold'; medal = '🥇'; }
+                else if (index === 1) { rankClass = 'silver'; medal = '🥈'; }
+                else if (index === 2) { rankClass = 'bronze'; medal = '🥉'; }
+                
+                // Zobrazení startovní váhy
+                const startWeight = person.start === 0 ? 'n/a' : `${person.start} kg`;
+                
+                // Procento cíle ze startovní váhy
+                let goalPercent = 'n/a';
+                if (person.start !== 0) {
+                    goalPercent = `${(Math.abs(person.goal) / person.start * 100).toFixed(1)}% start.hmot.`;
+                }
+                
+                // Určení, zda zhubl nebo přibral
+                const isNegative = change < 0;
+                const progressText = isNegative ? 
+                    `Přibral/a: ${Math.abs(progress).toFixed(1)}%` : 
+                    `Splněno: ${progress.toFixed(1)}%`;
+                const progressClass = isNegative ? 'negative' : (progress > 0 ? 'positive' : '');
+                const fillClass = isNegative ? 'negative' : '';
+                
+                const div = document.createElement('div');
+                div.className = 'participant';
+                div.innerHTML = `
+                    <div class="participant-header">
+                        <div class="rank ${rankClass}">${medal || (index + 1)}</div>
+                        <div class="participant-info">
+                            <div class="participant-name">${person.name}</div>
+                            <div class="participant-stats">
+                                <div class="participant-stat-line">Start: ${startWeight}</div>
+                                <div class="participant-stat-line">Aktuálně: ${person.start === 0 ? 'n/a' : current + ' kg'}</div>
+                                <div class="participant-stat-line">Změna: ${change.toFixed(1)} kg ${isNegative ? '⚠️' : '✓'}</div>
+                                <div class="participant-stat-line">Cíl: ${person.goal} kg (${goalPercent})</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="participant-progress-section">
+                        <div class="progress-bar">
+                            <div class="progress-fill ${fillClass}" style="width: ${Math.min(Math.abs(progress), 100)}%; background: ${person.color}"></div>
+                            <div class="progress-percentage ${progressClass}">${progressText}</div>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
+        }
+        
+        function renderProgressChart() {
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            
+            // Dynamicky vytvoříme labels podle počtu týdnů
+            const weekCount = participants[0].weeks.length - 1;
+            const weeks = ['Start'];
+            for (let i = 1; i <= weekCount; i++) {
+                weeks.push(`Týden ${i}`);
+            }
+            
+            const datasets = participants.map(person => ({
+                label: person.name,
+                data: person.weeks,
+                borderColor: person.color,
+                backgroundColor: person.color + '33',
+                tension: 0.4,
+                fill: false
+            }));
+            
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: weeks,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            title: {
+                                display: true,
+                                text: 'Váha (kg)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderWeeklyChart() {
+            const ctx = document.getElementById('weeklyChart').getContext('2d');
+            
+            // Zjistíme aktuální týden
+            const currentWeek = participants[0].weeks.length - 1;
+            
+            // Vypočítáme týdenní změny pro aktuální týden
+            const weeklyChanges = participants.map(person => {
+                if (currentWeek > 0) {
+                    const currentWeekWeight = person.weeks[currentWeek];
+                    const previousWeekWeight = person.weeks[currentWeek - 1];
+                    return previousWeekWeight - currentWeekWeight;
+                }
+                return 0;
+            });
+            
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: participants.map(p => p.name),
+                    datasets: [{
+                        label: `Úbytek v týdnu ${currentWeek} (kg)`,
+                        data: weeklyChanges,
+                        backgroundColor: participants.map(p => p.color),
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Úbytek (kg)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function renderEntryFields() {
+            const grid = document.getElementById('entryGrid');
+            participants.forEach(person => {
+                const div = document.createElement('div');
+                div.className = 'entry-field';
+                
+                // Pro Annette a Katku zadáváme změnu, pro ostatní absolutní váhu
+                const isChangeMode = person.start === 0;
+                const placeholder = isChangeMode ? 'Změna váhy (např. -0.5)' : 'Váha v kg';
+                const label = isChangeMode ? `${person.name} (změna)` : person.name;
+                
+                div.innerHTML = `
+                    <label>${label}</label>
+                    <input type="number" step="0.1" id="weight-${person.name}" placeholder="${placeholder}">
+                `;
+                grid.appendChild(div);
+            });
+        }
+        
+        function saveWeights() {
+            let hasData = false;
+            
+            participants.forEach(person => {
+                const input = document.getElementById(`weight-${person.name}`);
+                if (input.value) {
+                    const value = parseFloat(input.value);
+                    
+                    // Pro Annette a Katku (start = 0) zadáváme změnu, pro ostatní absolutní váhu
+                    if (person.start === 0) {
+                        // Změna: např. -0.5 znamená zhubnout 0.5 kg
+                        const currentWeight = person.weeks[person.weeks.length - 1];
+                        person.weeks.push(currentWeight + value);
+                    } else {
+                        // Absolutní váha
+                        person.weeks.push(value);
+                    }
+                    
+                    input.value = '';
+                    hasData = true;
+                }
+            });
+            
+            if (hasData) {
+                // Překreslíme všechny grafy a tabulky
+                refreshDisplay();
+                alert('✅ Váhy uloženy a grafy aktualizovány!\n\n💡 Nezapomeň stáhnout data, abys o ně nepřišel!');
+            } else {
+                alert('⚠️ Prosím zadejte alespoň jednu váhu.');
+            }
+        }
+        
+        function refreshDisplay() {
+            // Nejdřív vyčistíme všechny seznamy
+            const leaderboardList = document.getElementById('leaderboardList');
+            const olympicTable = document.getElementById('olympicTable');
+            const olympicPodium = document.getElementById('olympicPodium');
+            
+            if (leaderboardList) leaderboardList.innerHTML = '';
+            if (olympicTable) olympicTable.innerHTML = '';
+            if (olympicPodium) olympicPodium.innerHTML = '';
+            
+            // Pak vykreslíme nové
+            renderOlympicRanking();
+            renderLeaderboard();
+            
+            // Aktualizujeme číslo týdne v nadpisu
+            const currentWeek = participants[0].weeks.length - 1;
+            document.querySelector('.header p').textContent = `22 týdnů hubnutí | Týden ${currentWeek} z 22`;
+            document.querySelector('.data-entry h2').textContent = `➕ Zadat novou váhu (Týden ${currentWeek + 1})`;
+            
+            // Aktualizujeme statistiky
+            updateStats();
+            
+            // Zničíme staré grafy a vytvoříme nové
+            const progressCanvas = document.getElementById('progressChart');
+            const weeklyCanvas = document.getElementById('weeklyChart');
+            
+            // Smazat staré Chart instance
+            Chart.getChart(progressCanvas)?.destroy();
+            Chart.getChart(weeklyCanvas)?.destroy();
+            
+            // Vytvořit nové grafy
+            renderProgressChart();
+            renderWeeklyChart();
+        }
+        
+        function updateStats() {
+            // Celkový úbytek
+            let totalLoss = 0;
+            participants.forEach(person => {
+                const current = person.weeks[person.weeks.length - 1];
+                totalLoss += (person.start - current);
+            });
+            
+            // Průměrný týdenní úbytek
+            const weekCount = participants[0].weeks.length - 1;
+            const avgWeekly = weekCount > 0 ? totalLoss / weekCount : 0;
+            
+            // Procento postupu
+            const totalGoal = -50;
+            const progressPercent = (totalLoss / Math.abs(totalGoal)) * 100;
+            
+            document.querySelectorAll('.stat-card .value')[1].textContent = `${totalLoss.toFixed(1)} kg`;
+            document.querySelectorAll('.stat-card .value')[2].textContent = `${avgWeekly.toFixed(2)} kg`;
+            document.querySelectorAll('.stat-card .value')[3].textContent = `${progressPercent.toFixed(1)}%`;
+        }
+        
+        function downloadData() {
+            const data = {
+                version: '1.0',
+                lastUpdated: new Date().toISOString(),
+                participants: participants
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `huhlu-vyzva-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+        }
+        
+        function downloadHTML() {
+            // Získáme celý HTML kód stránky
+            const htmlContent = document.documentElement.outerHTML;
+            
+            // Aktualizujeme data v HTML kódu
+            const updatedHTML = htmlContent.replace(
+                /const participants = \[[\s\S]*?\];/,
+                `const participants = ${JSON.stringify(participants, null, 12)};`
+            );
+            
+            // Vytvoříme soubor ke stažení
+            const blob = new Blob([updatedHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `index.html`;
+            link.click();
+            
+            URL.revokeObjectURL(url);
+            
+            alert('✅ HTML soubor stažen!\n\n📤 Nahraj ho na GitHub a přepiš starý soubor.');
+        }
+        
+        function uploadData(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    
+                    // Validace dat
+                    if (!data.participants || !Array.isArray(data.participants)) {
+                        throw new Error('Neplatný formát dat');
+                    }
+                    
+                    // Načteme data
+                    data.participants.forEach((savedPerson, index) => {
+                        if (participants[index] && savedPerson.name === participants[index].name) {
+                            participants[index].weeks = savedPerson.weeks;
+                        }
+                    });
+                    
+                    // Překreslíme vše
+                    refreshDisplay();
+                    
+                    alert('✅ Data úspěšně nahrána!');
+                } catch (error) {
+                    alert('❌ Chyba při načítání dat: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+            
+            // Reset file input
+            event.target.value = '';
+        }
+        
+        renderOlympicRanking();
+        renderLeaderboard();
+        renderProgressChart();
+        renderWeeklyChart();
+        renderEntryFields();
+    </script>
+</body>
+</html>
