@@ -1037,6 +1037,7 @@
         
         function renderEntryFields() {
             const grid = document.getElementById('entryGrid');
+            grid.innerHTML = '';
             participants.forEach(person => {
                 const div = document.createElement('div');
                 div.className = 'entry-field';
